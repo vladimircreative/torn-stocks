@@ -1,0 +1,8 @@
+body {
+	
+}
+
+table, th, td, tr, input {
+  border: 1px solid black;
+  text-align:center;
+}
