@@ -22,11 +22,13 @@ async function createTable(stonx) {
   	var cell2 = row.insertCell(1);
   	var cell3 = row.insertCell(2);
   	var cell4 = row.insertCell(3);
+  	var cell5 = row.insertCell(4);
   	cell4.id = "price";
   	cell1.innerHTML = stonx[i]["stock_id"];
   	cell2.innerHTML = stonx[i]["acronym"];
   	cell3.innerHTML = stonx[i]["name"];
   	cell4.innerHTML = stonx[i]["current_price"];
+  	cell5.innerHTML = stonx[i]["current_price"] - 0.01;
 
   	var loss = document.createElement("INPUT");
   	loss.value = 0;
@@ -51,8 +53,17 @@ async function updateTable() {
 	for (i in stonx){	
 		var acro = stonx[i]["name"] + " (" + stonx[i]["acronym"] + ")";
 		var cell = table.rows[stonx[i]["stock_id"]].cells[3];
+		var cellLowest = table.rows[stonx[i]["stock_id"]].cells[4];
 		var oldPrice = cell.innerHTML;
 		var newPrice = stonx[i]["current_price"];
+		var cellLowestPrice = cellLowest.innerHTML;
+
+		if (newPrice <= cellLowestPrice) {
+			cellLowest.innerHTML = newPrice;
+			cellLowest.style.background = 'red';
+		}
+		else {cellLowest.style.background = 'transparent';}
+
 		if (newPrice < oldPrice) {
 			cell.style.background = 'red';
 		}
@@ -69,7 +80,7 @@ async function updateTable() {
 		var lossAlarm = " is below " + lossPrice;
 		var gainAlarm = " reached " + gainPrice;
 		if (lossPrice > 0 && newPrice < lossPrice){
-			loss.value = 0; 
+			loss.value = newPrice - 0.01; 
 			loss.style.background = "red";
 			if (sound) {lossSound.play()}; 
 			alert(acro + lossAlarm)}
@@ -77,7 +88,7 @@ async function updateTable() {
 				loss.style.background = "transparent";
 			};
 		if (gainPrice > 0 && newPrice > gainPrice){
-			gain.value = 0; 
+			gain.value = newPrice + 0.01; 
 			gain.style.background = "lime";
 			if (sound) {cashSound.play()}; 
 			alert(acro + gainAlarm)}
@@ -90,4 +101,4 @@ async function updateTable() {
 const cashSound = new Audio("https://www.myinstants.com/media/sounds/cash-register-sound-fx_HgrEcyp.mp3");
 const lossSound = new Audio("https://www.myinstants.com/media/sounds/emergency-meeting.mp3");
 createTable();
-var interval = setInterval(updateTable, 10000);
+var interval = setInterval(updateTable, 20000);
