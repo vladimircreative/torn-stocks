@@ -28,7 +28,7 @@ async function createTable(stonx) {
   	cell2.innerHTML = stonx[i]["acronym"];
   	cell3.innerHTML = stonx[i]["name"];
   	cell4.innerHTML = stonx[i]["current_price"];
-  	cell5.innerHTML = stonx[i]["current_price"] - 0.01;
+  	cell5.innerHTML = stonx[i]["current_price"];
 
   	var loss = document.createElement("INPUT");
   	loss.value = 0;
