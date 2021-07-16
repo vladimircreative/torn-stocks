@@ -12,6 +12,7 @@ const updateStonx = async () => {
 }
 
 async function createTable(stonx) {
+	document.getElementById("”sound”").checked = true;
 	var stonx = await updateStonx();
 // iterate and add table rows
   var table = document.getElementById("stonx table");
@@ -23,12 +24,14 @@ async function createTable(stonx) {
   	var cell3 = row.insertCell(2);
   	var cell4 = row.insertCell(3);
   	var cell5 = row.insertCell(4);
+  	var cell6 = row.insertCell(5);
   	cell4.id = "price";
   	cell1.innerHTML = stonx[i]["stock_id"];
   	cell2.innerHTML = stonx[i]["acronym"];
   	cell3.innerHTML = stonx[i]["name"];
   	cell4.innerHTML = stonx[i]["current_price"];
   	cell5.innerHTML = stonx[i]["current_price"];
+  	cell6.innerHTML = stonx[i]["current_price"];
 
   	var loss = document.createElement("INPUT");
   	loss.value = 0;
@@ -54,13 +57,21 @@ async function updateTable() {
 		var acro = stonx[i]["name"] + " (" + stonx[i]["acronym"] + ")";
 		var cell = table.rows[stonx[i]["stock_id"]].cells[3];
 		var cellLowest = table.rows[stonx[i]["stock_id"]].cells[4];
+		var cellHighest = table.rows[stonx[i]["stock_id"]].cells[5];
 		var oldPrice = cell.innerHTML;
 		var newPrice = stonx[i]["current_price"];
 		var cellLowestPrice = cellLowest.innerHTML;
+		var cellHighestPrice = cellHighest.innerHTML;
 
-		if (newPrice <= cellLowestPrice) {
+		if (newPrice < cellLowestPrice) {
 			cellLowest.innerHTML = newPrice;
 			cellLowest.style.background = 'red';
+		}
+		else {cellLowest.style.background = 'transparent';}
+
+		if (newPrice > cellHighestPrice) {
+			cellHighest.innerHTML = newPrice;
+			cellHighest.style.background = 'lime';
 		}
 		else {cellLowest.style.background = 'transparent';}
 
@@ -83,7 +94,8 @@ async function updateTable() {
 			loss.value = newPrice - 0.01; 
 			loss.style.background = "red";
 			if (sound) {lossSound.play()}; 
-			alert(acro + lossAlarm)}
+			//alert(acro + lossAlarm)
+			}
 			else {
 				loss.style.background = "transparent";
 			};
@@ -91,7 +103,8 @@ async function updateTable() {
 			gain.value = newPrice + 0.01; 
 			gain.style.background = "lime";
 			if (sound) {cashSound.play()}; 
-			alert(acro + gainAlarm)}
+			//alert(acro + gainAlarm)
+			}
 			else {
 				gain.style.background = "transparent";
 			};;
