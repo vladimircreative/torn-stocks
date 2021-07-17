@@ -75,10 +75,10 @@ async function updateTable() {
 		}
 		else {cellHighest.style.background = 'transparent';}
 
-		if (newPrice < oldPrice) {
+		if (newPrice <= oldPrice) {
 			cell.style.background = 'red';
 		}
-		else if (newPrice > oldPrice) {
+		else if (newPrice >= oldPrice) {
 			cell.style.background = 'lime';
 		}
 		//else {cell.style.background = 'transparent'};
