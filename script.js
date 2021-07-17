@@ -63,22 +63,22 @@ async function updateTable() {
 		var cellLowestPrice = cellLowest.innerHTML;
 		var cellHighestPrice = cellHighest.innerHTML;
 
-		if (newPrice < cellLowestPrice) {
+		if (newPrice <= cellLowestPrice) {
 			cellLowest.innerHTML = newPrice;
 			cellLowest.style.background = 'red';
 		}
 		else {cellLowest.style.background = 'transparent';}
 
-		if (newPrice > cellHighestPrice) {
+		if (newPrice => cellHighestPrice) {
 			cellHighest.innerHTML = newPrice;
 			cellHighest.style.background = 'lime';
 		}
 		else {cellHighest.style.background = 'transparent';}
 
-		if (newPrice <= oldPrice) {
+		if (newPrice < oldPrice) {
 			cell.style.background = 'red';
 		}
-		else if (newPrice >= oldPrice) {
+		else if (newPrice > oldPrice) {
 			cell.style.background = 'lime';
 		}
 		//else {cell.style.background = 'transparent'};
