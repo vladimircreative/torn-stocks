@@ -78,10 +78,11 @@ async function updateTable() {
 		if (newPrice < oldPrice) {
 			cell.style.background = 'red';
 		}
-		else if (newPrice >= oldPrice) {
+		else if (newPrice > oldPrice) {
 			cell.style.background = 'lime';
 		}
-		//else {cell.style.background = 'transparent'};
+		else {cell.style.background = 'transparent'};
+		
 		cell.innerHTML = newPrice;
 		// alarm
 		var loss = document.getElementById("loss"+stonx[i]["stock_id"]);
@@ -114,4 +115,5 @@ async function updateTable() {
 const cashSound = new Audio("https://www.myinstants.com/media/sounds/cash-register-sound-fx_HgrEcyp.mp3");
 const lossSound = new Audio("https://www.myinstants.com/media/sounds/emergency-meeting.mp3");
 createTable();
+updateTable()
 var interval = setInterval(updateTable, 20000);
