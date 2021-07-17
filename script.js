@@ -67,13 +67,13 @@ async function updateTable() {
 			cellLowest.innerHTML = newPrice;
 			cellLowest.style.background = 'red';
 		}
-		else {cellLowest.style.background = 'transparent';}
-
-		if (newPrice => cellHighestPrice) {
-			cellHighest.innerHTML = newPrice;
-			cellHighest.style.background = 'lime';
+		else {cellLowest.style.background = 'transparent';
+			if (newPrice => cellHighestPrice) {
+				cellHighest.innerHTML = newPrice;
+				cellHighest.style.background = 'lime';
+			}
+			else {cellHighest.style.background = 'transparent';}
 		}
-		else {cellHighest.style.background = 'transparent';}
 
 		if (newPrice < oldPrice) {
 			cell.style.background = 'red';
