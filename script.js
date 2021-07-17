@@ -82,7 +82,7 @@ async function updateTable() {
 		else if (newPrice > oldPrice) {
 			cell.style.background = 'lime';
 		}
-		else {cell.style.background = 'transparent'};
+		//else {cell.style.background = 'transparent'};
 		
 		cell.innerHTML = newPrice;
 		// alarm
