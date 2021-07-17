@@ -70,6 +70,7 @@ async function updateTable() {
 		}
 		else {cellLowest.style.background = 'transparent';
 			if (newPrice => cellHighestPrice) {
+				console.log(newPrice, cellHighestPrice)
 				cellHighest.innerHTML = newPrice;
 				cellHighest.style.background = 'lime';
 			}
